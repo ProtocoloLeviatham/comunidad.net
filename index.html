@@ -11,6 +11,7 @@
         :root {
             --purple-color: #bb00ff; /* Morado Hacking */
             --fire-color: #ff8c00;   /* Naranja/Fuego para destacar */
+            --fire-red: #ff0000;     /* Rojo Fuego */
             --gold-color: #ffd700;   /* Oro para Roles VIP */
             --dark-bg: #111;
             --mid-bg: #1e1e1e;
@@ -23,6 +24,7 @@
             font-family: 'Roboto Mono', monospace;
             margin: 0;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* --- Lluvia de Código (Matrix) --- */
@@ -48,13 +50,15 @@
 
         header h1 {
             color: var(--purple-color);
-            text-shadow: 0 0 10px var(--purple-color);
-            font-size: 2.5em;
+            text-shadow: 0 0 10px var(--purple-color), 0 0 20px rgba(187, 0, 255, 0.4);
+            font-size: 2.8em;
             margin-bottom: 20px;
+            letter-spacing: 2px;
         }
         header p {
-            font-size: 1.1em;
-            margin-bottom: 40px;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            color: #ccc;
         }
 
         /* --- Puertas de Acceso (Botones) --- */
@@ -62,33 +66,33 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 60px;
+            gap: 25px;
+            margin-bottom: 70px;
         }
 
         .platform-button {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 250px;
+            width: 280px;
             background-color: transparent;
             color: #fff;
             border: 2px solid var(--purple-color);
-            padding: 15px 30px;
+            padding: 18px 35px;
             text-decoration: none;
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 2px;
-            border-radius: 8px;
+            letter-spacing: 3px;
+            border-radius: 10px;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s;
+            transition: all 0.5s ease-in-out;
             z-index: 1;
         }
 
         .platform-button i {
-            font-size: 1.5em;
-            margin-right: 15px;
+            font-size: 1.6em;
+            margin-right: 18px;
         }
 
         /* Efecto Hover: Brillo morado */
@@ -100,80 +104,116 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(120deg, transparent, var(--purple-color), transparent);
-            transition: left 0.7s;
+            transition: left 0.8s ease-in-out;
             z-index: -1;
         }
 
         .platform-button:hover {
             color: var(--dark-bg);
             background-color: var(--purple-color);
-            box-shadow: 0 0 15px var(--purple-color), 0 0 30px var(--purple-color);
+            box-shadow: 0 0 20px var(--purple-color), 0 0 40px var(--purple-color);
+            transform: scale(1.05);
         }
 
         .platform-button:hover::before {
             left: 100%;
         }
 
-        /* --- Hall of Fame (FUEGO MEJORADO) --- */
+        /* --- Hall of Fame (FUEGO LITERAL Y TEXTO DE GLORIA) --- */
         .hall-of-fame {
-            margin: 50px auto;
+            margin: 80px auto;
         }
 
+        /* Título con efecto de fuego */
         .hall-of-fame h2 {
             color: var(--fire-color);
-            text-shadow: 0 0 5px var(--fire-color), 0 0 15px rgba(255, 140, 0, 0.5); /* Sombra intensa */
-            margin-bottom: 30px;
-            font-size: 1.8em;
+            text-shadow: 
+                0 0 7px var(--fire-color), 
+                0 0 15px var(--fire-red), 
+                0 0 25px rgba(255, 0, 0, 0.7); 
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            letter-spacing: 2px;
+            animation: textFireGlow 1.5s infinite alternate; 
+        }
+
+        @keyframes textFireGlow {
+            0% { text-shadow: 0 0 7px var(--fire-color), 0 0 15px var(--fire-red), 0 0 25px rgba(255, 0, 0, 0.7); }
+            50% { text-shadow: 0 0 10px var(--fire-color), 0 0 25px var(--fire-red), 0 0 40px rgba(255, 0, 0, 1); }
+            100% { text-shadow: 0 0 7px var(--fire-color), 0 0 15px var(--fire-red), 0 0 25px rgba(255, 0, 0, 0.7); }
         }
 
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
             padding: 20px 0;
         }
 
         .member-card {
             background-color: var(--mid-bg);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
             position: relative;
             overflow: hidden;
             border: 1px solid #333;
+            transition: transform 0.3s ease-in-out;
         }
 
-        /* KEYFRAMES para la animación de fuego/brillo (MÁS INTENSO) */
-        @keyframes fireGlow {
-            0% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4), 0 0 15px rgba(255, 0, 0, 0.3); }
-            50% { box-shadow: 0 0 15px var(--fire-color), 0 0 30px rgba(255, 140, 0, 0.8), 0 0 45px rgba(255, 0, 0, 0.6); }
-            100% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4), 0 0 15px rgba(255, 0, 0, 0.3); }
+        .member-card:hover {
+            transform: translateY(-8px);
+            z-index: 2;
         }
 
-        /* Marco de "Fuego" animado para destacar */
+        /* KEYFRAMES para la animación de fuego literal en los bordes */
+        @keyframes fireBorderGlow {
+            0% { 
+                box-shadow: 0 0 8px var(--fire-color), 
+                            0 0 15px var(--fire-red), 
+                            0 0 25px rgba(255, 0, 0, 0.8),
+                            inset 0 0 5px var(--fire-color);
+                border-color: var(--fire-color); 
+            }
+            50% { 
+                box-shadow: 0 0 15px var(--fire-color), 
+                            0 0 30px var(--fire-red), 
+                            0 0 50px rgba(255, 0, 0, 1),
+                            inset 0 0 10px var(--fire-color);
+                border-color: var(--fire-red); 
+            }
+            100% { 
+                box-shadow: 0 0 8px var(--fire-color), 
+                            0 0 15px var(--fire-red), 
+                            0 0 25px rgba(255, 0, 0, 0.8),
+                            inset 0 0 5px var(--fire-color);
+                border-color: var(--fire-color); 
+            }
+        }
+
+        /* Marco de "Fuego Literal" animado para destacar */
         .member-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 3px solid var(--fire-color);
-            border-radius: 8px;
-            /* Aplicamos la animación */
-            animation: fireGlow 1.8s infinite alternate; /* Animación más rápida */
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 4px solid var(--fire-color);
+            border-radius: 12px;
+            animation: fireBorderGlow 1.5s infinite alternate;
             pointer-events: none;
             opacity: 0.9;
         }
 
         .member-photo {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             overflow: hidden;
             border-radius: 50%;
-            margin: 0 auto 10px;
-            border: 3px solid #fff;
-            box-shadow: 0 0 5px var(--purple-color);
+            margin: 0 auto 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 0 8px var(--purple-color);
         }
 
         .member-photo img {
@@ -182,100 +222,112 @@
             object-fit: cover;
         }
 
+        /* Efecto de Gloria en el texto del miembro */
         .member-text {
-            font-size: 0.9em;
-            color: #ccc;
-            height: 6em; 
+            font-size: 0.95em;
+            color: #e0e0e0;
+            height: 8em; /* 8em para más texto */
             overflow: hidden;
-            line-height: 1.5;
+            line-height: 1.6;
+            text-shadow: 0 0 3px var(--gold-color), 0 0 8px rgba(255, 215, 0, 0.3); /* Sombra dorada */
         }
         
         /* --- Eventos y Novedades --- */
         .events-news {
-            margin: 80px auto;
+            margin: 100px auto;
             text-align: left;
-            padding: 30px;
+            padding: 40px;
             background-color: #222;
-            border-radius: 12px;
+            border-radius: 15px;
             border: 2px solid var(--purple-color);
-            box-shadow: 0 0 20px rgba(187, 0, 255, 0.3);
+            box-shadow: 0 0 25px rgba(187, 0, 255, 0.4), 0 0 40px rgba(187, 0, 255, 0.2);
         }
 
         .events-news h2 {
             color: #00ff41;
-            text-shadow: 0 0 5px #00ff41;
+            text-shadow: 0 0 7px #00ff41, 0 0 15px rgba(0, 255, 65, 0.5);
             border-bottom: 2px solid var(--purple-color);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
             text-align: center;
+            font-size: 2.2em;
+            letter-spacing: 1.5px;
         }
         
         .sections-wrapper {
             display: flex;
-            gap: 40px;
+            gap: 50px;
         }
         
         .calendar-section, .announcements-section {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
         }
         
         .calendar-section h3, .announcements-section h3 {
             color: var(--fire-color);
-            font-size: 1.3em;
-            margin-bottom: 20px;
+            font-size: 1.4em;
+            margin-bottom: 25px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .event-item {
-            margin-bottom: 20px;
-            padding: 12px;
-            border-left: 4px solid var(--purple-color);
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 5px solid var(--purple-color);
             background-color: var(--mid-bg);
-            border-radius: 4px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 6px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         
         .event-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
 
         .event-date {
             color: #00ff41;
             font-weight: 700;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1.05em;
         }
         
         .event-location {
-            font-size: 0.9em;
-            color: #aaa;
+            font-size: 0.95em;
+            color: #bbb;
         }
 
         .announcement-item {
-            margin-bottom: 25px;
-            padding: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
             background-color: var(--mid-bg);
-            border: 1px solid #333;
-            border-top: 3px solid var(--fire-color);
-            border-radius: 6px;
+            border: 1px solid #444;
+            border-top: 4px solid var(--fire-color);
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .announcement-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
 
         .announcement-item strong {
             color: var(--purple-color);
             display: block;
-            margin-bottom: 8px;
-            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-size: 1.2em;
         }
 
         .announcement-photo-container {
             width: 100%;
-            height: **200px;** /* Agrandado a 200px */
+            height: 220px;
             overflow: hidden;
-            margin-top: 10px;
-            border-radius: 4px;
-            border: 1px solid #555;
+            margin-top: 15px;
+            border-radius: 6px;
+            border: 1px solid #666;
         }
 
         .announcement-photo-container img {
@@ -285,104 +337,157 @@
             object-position: center top;
         }
 
-        /* --- Sección de Roles (NUEVO) --- */
+        /* --- Sección de Roles --- */
         .roles-section {
-            margin: 80px auto;
-            padding: 30px;
+            margin: 100px auto;
+            padding: 40px;
             background-color: #0d0d0d;
-            border: 2px solid var(--gold-color);
-            border-radius: 12px;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            border: 3px solid var(--gold-color);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 50px rgba(255, 215, 0, 0.2);
         }
         
         .roles-section h2 {
             color: var(--gold-color);
-            text-shadow: 0 0 10px var(--gold-color);
-            margin-bottom: 40px;
-            font-size: 2em;
+            text-shadow: 0 0 12px var(--gold-color), 0 0 25px rgba(255, 215, 0, 0.7);
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
         }
 
         .roles-grid {
             display: flex;
             justify-content: space-around;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
         }
 
         .role-card {
             background-color: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            width: 300px;
+            padding: 25px;
+            border-radius: 10px;
+            width: 320px;
             text-align: left;
             position: relative;
-            transition: transform 0.3s;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
             overflow: hidden;
+            border: 1px solid #333;
         }
 
         .role-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
         .role-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 1.6em;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
+            letter-spacing: 1px;
         }
 
         /* Estilo y Efecto Único para cada Rol */
-
-        /* Rol 1: Cryptographer (20 Invita) */
         .role-1 {
             border: 2px solid var(--purple-color);
-            box-shadow: 0 0 10px var(--purple-color);
+            box-shadow: 0 0 12px var(--purple-color);
         }
         .role-1 h3 { color: var(--purple-color); }
-        .role-1 h3 i { margin-right: 10px; color: #00ff41; }
+        .role-1 h3 i { margin-right: 12px; color: #00ff41; font-size: 1.2em; }
         
-        /* Rol 2: Sentinel (100 Invita) */
         .role-2 {
             border: 2px solid var(--fire-color);
-            box-shadow: 0 0 15px var(--fire-color);
+            box-shadow: 0 0 18px var(--fire-color), 0 0 30px rgba(255, 140, 0, 0.5);
         }
         .role-2 h3 { color: var(--fire-color); }
-        .role-2 h3 i { margin-right: 10px; color: var(--gold-color); }
+        .role-2 h3 i { margin-right: 12px; color: var(--gold-color); font-size: 1.3em; }
 
-        /* Rol 3: Leviathan Elite (200 Invita) */
         @keyframes pulseGold {
-            0% { box-shadow: 0 0 10px var(--gold-color), 0 0 20px rgba(255, 215, 0, 0.5); }
-            100% { box-shadow: 0 0 20px var(--gold-color), 0 0 40px rgba(255, 215, 0, 0.8); }
+            0% { box-shadow: 0 0 15px var(--gold-color), 0 0 30px rgba(255, 215, 0, 0.6); }
+            100% { box-shadow: 0 0 25px var(--gold-color), 0 0 50px rgba(255, 215, 0, 0.9); }
         }
         .role-3 {
-            border: 3px solid var(--gold-color);
+            border: 4px solid var(--gold-color);
             background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
-            animation: pulseGold 1.5s infinite alternate;
+            animation: pulseGold 1.3s infinite alternate;
         }
-        .role-3 h3 { color: var(--gold-color); text-shadow: 0 0 5px var(--gold-color); }
-        .role-3 h3 i { margin-right: 10px; font-size: 1.8em; }
+        .role-3 h3 { color: var(--gold-color); text-shadow: 0 0 8px var(--gold-color); }
+        .role-3 h3 i { margin-right: 12px; font-size: 2em; }
 
         .role-card ul {
             list-style: none;
             padding: 0;
-            font-size: 0.9em;
+            font-size: 0.95em;
+            color: #e0e0e0;
         }
 
         .role-card ul li {
-            margin-bottom: 8px;
-            border-bottom: 1px dotted #333;
-            padding-bottom: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px dotted #444;
+            padding-bottom: 8px;
+        }
+        .role-card ul li i {
+            margin-right: 8px;
+            color: #00ff41;
         }
         
+        /* --- Pie de Página (FOOTER) --- */
+        footer {
+            margin-top: 100px;
+            padding: 30px 20px;
+            background-color: #0a0a0a;
+            border-top: 2px solid var(--purple-color);
+            color: #888;
+            font-size: 0.9em;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        footer a {
+            color: var(--purple-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: var(--fire-color);
+        }
+
+
         /* --- MEDIA QUERIES (Adaptación Móvil) --- */
         @media (max-width: 768px) {
-            /* ... (Estilos móviles anteriores se mantienen) ... */
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .access-gates {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .platform-button {
+                width: 90%;
+                margin: 0 auto;
+            }
+
             .sections-wrapper, .roles-grid {
                 flex-direction: column;
                 align-items: center;
             }
-            .role-card {
-                width: 90%;
+
+            .member-card, .role-card {
+                max-width: 90%;
+                width: auto;
+                margin: 0 auto;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .events-news, .roles-section {
+                padding: 20px 15px;
+            }
+            .events-news h2, .roles-section h2 {
+                font-size: 1.8em;
             }
         }
 
@@ -407,17 +512,17 @@
             </a>
         </section>
 
-        <hr style="border-color: #333;">
+        <hr style="border-color: #333; margin: 80px auto;">
 
         <section class="hall-of-fame">
-            <h2>🔥 Hall of Fame - Reconocimiento a Destacados</h2>
+            <h2>🔥 Hall of Fame - Reconocimiento a Destacados 🔥</h2>
             <div class="members-grid">
                 <div class="member-card">
                     <div class="member-photo">
                         <img src="miembro1.png" alt="Foto de Miembro 1">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario 1]** - Ganador del CTF "Shadow Protocol" de Q3. Código limpio y eficaz. Demostrando habilidades superiores en *reversing* binario.
+                        **[Nombre de Usuario 1]** - Ganador indiscutible del CTF "Shadow Protocol" de Q3. Su código limpio y eficaz demostró habilidades superiores en *reversing* binario y análisis forense. ¡Una verdadera leyenda en la comunidad!
                     </div>
                 </div>
                 <div class="member-card">
@@ -425,7 +530,7 @@
                         <img src="miembro2.png" alt="Foto de Miembro 2">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario 2]** - Contribuyó con la herramienta Python automatizada para ofuscación de payloads y bypass de AV. Un gran aporte open source.
+                        **[Nombre de Usuario 2]** - Visionario que contribuyó con una herramienta Python automatizada para ofuscación de *payloads* y *bypass* de AV. Un gran aporte *open source* que ya está en uso por muchos miembros.
                     </div>
                 </div>
                 <div class="member-card">
@@ -433,7 +538,7 @@
                         <img src="miembro3.png" alt="Foto de Miembro 3">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario 3]** - Miembro más activo en el foro durante el último mes. Gran soporte a novatos y mantenedor de las FAQs.
+                        **[Nombre de Usuario 3]** - El miembro más activo y servicial en el foro durante el último mes. Su dedicación al soporte de novatos y su rol como mantenedor de las FAQs es invaluable. Un pilar fundamental de Protocolo Leviatham.
                     </div>
                 </div>
                 <div class="member-card">
@@ -441,7 +546,7 @@
                         <img src="miembro4.png" alt="Foto de Miembro 4">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario 4]** - Descubrió un bug crítico RCE (Remote Code Execution) en la plataforma de entrenamiento interna. Reporte impecable.
+                        **[Nombre de Usuario 4]** - El cazador de bugs que descubrió un **bug crítico RCE** (Remote Code Execution) en la plataforma de entrenamiento interna. Su reporte fue impecable y permitió fortalecer nuestra seguridad.
                     </div>
                 </div>
                 <div class="member-card">
@@ -449,14 +554,14 @@
                         <img src="miembro5.png" alt="Foto de Miembro 5">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario 5]** - Diseñador y administrador de la nueva infraestructura de servidores del grupo de estudio. Seguridad *hardcore* implementada.
+                        **[Nombre de Usuario 5]** - El arquitecto detrás de la nueva infraestructura de servidores del grupo de estudio. Implementó una seguridad *hardcore* y optimizó el rendimiento. ¡Un verdadero *sysadmin* de élite!
                     </div>
                 </div>
                 
             </div>
         </section>
 
-        <hr style="border-color: #333;">
+        <hr style="border-color: #333; margin: 80px auto;">
 
         <section class="events-news">
             <h2><i class="fas fa-microchip"></i> EVENTOS Y NOVEDADES DEL PROTOCOLO LEVIATHAM</h2>
@@ -485,14 +590,14 @@
                     <h3>Novedades Oficiales <i class="fas fa-bullhorn"></i></h3>
                     <div class="announcement-item">
                         <strong>¡Lanzamiento de la versión 2.0 de PhishGuard!</strong>
-                        <p>Hemos liberado la v2.0 de nuestra herramienta interna "PhishGuard", con soporte para Python 3.10 y nuevos templates de *phishing*.</p>
+                        <p>Hemos liberado la v2.0 de nuestra herramienta interna "PhishGuard", con soporte para Python 3.10 y nuevos templates de *phishing* para una mayor efectividad.</p>
                         <div class="announcement-photo-container">
                             <img src="noticia_phishguard.png" alt="Imagen de la nueva versión de PhishGuard">
                         </div>
                     </div>
                     <div class="announcement-item">
                         <strong>¡Damos la Bienvenida a 3 Nuevos Moderadores!</strong>
-                        <p>Damos la bienvenida a 3 nuevos *moderadores* al equipo de soporte y gestión de la comunidad. Ayúdanos a darles una cálida bienvenida.</p>
+                        <p>Damos la bienvenida a 3 nuevos *moderadores* al equipo de soporte y gestión de la comunidad. Su experiencia fortalecerá nuestro ecosistema. Ayúdanos a darles una cálida bienvenida.</p>
                         <div class="announcement-photo-container">
                             <img src="noticia_equipo.png" alt="Imagen del nuevo equipo de moderadores">
                         </div>
@@ -502,7 +607,7 @@
             </div>
         </section>
         
-        <hr style="border-color: #333;">
+        <hr style="border-color: #333; margin: 80px auto;">
 
         <section class="roles-section">
             <h2>🥇 Programas de Recompensa: Roles de Élite</h2>
@@ -527,7 +632,7 @@
                     <p>**Recompensas Incluidas (Acumulativas):**</p>
                     <ul>
                         <li><i class="fas fa-globe"></i> **Página Web** o Landing Page Personalizada (Hosting incluido)</li>
-                        <li><i class="fas fa-chalkboard-teacher"></i> **Mentoría Individualizada** (Temas a elección: Reversing, Web Hacking)</li>
+                        <li><i class="fas fa-chalkboard-teacher"></i> **Mentoría Individualizada** (Temas a elección: Reversing, Web Hacking, Infra)</li>
                         <li><i class="fas fa-biohazard"></i> Acceso a **Herramientas Beta** de Pentesting (Uso ético y legal bajo tu responsabilidad)</li>
                     </ul>
                 </div>
@@ -550,5 +655,12 @@
     </div>
 
     <script src="script.js"></script>
+
+    <footer>
+        &copy; 2025 Protocolo Leviatham. | **Industrial Inc. Leviatham**. | Todos los Derechos Reservados.
+        <br>
+        <a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a>
+    </footer>
+
 </body>
 </html>
