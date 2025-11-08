@@ -21,7 +21,7 @@
             color: #fff;
             font-family: 'Roboto Mono', monospace;
             margin: 0;
-            overflow-x: hidden; /* Previene scroll horizontal en móviles */
+            overflow-x: hidden;
         }
 
         /* --- Lluvia de Código (Matrix) --- */
@@ -127,7 +127,7 @@
 
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adaptación flexible */
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 25px;
             padding: 20px 0;
         }
@@ -140,9 +140,18 @@
             position: relative;
             overflow: hidden;
             border: 1px solid #333;
+            /* Contenedor del efecto de fuego */
+            box-shadow: 0 0 5px rgba(255, 140, 0, 0.2);
         }
 
-        /* Marco de "Fuego" para destacar */
+        /* KEYFRAMES para la animación de fuego/brillo */
+        @keyframes fireGlow {
+            0% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4); }
+            50% { box-shadow: 0 0 15px var(--fire-color), 0 0 30px rgba(255, 140, 0, 0.8); }
+            100% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4); }
+        }
+
+        /* Marco de "Fuego" animado para destacar */
         .member-card::before {
             content: '';
             position: absolute;
@@ -152,16 +161,17 @@
             bottom: 0;
             border: 3px solid var(--fire-color);
             border-radius: 8px;
-            box-shadow: 0 0 10px var(--fire-color), 0 0 20px rgba(255, 140, 0, 0.5);
-            pointer-events: none; /* Asegura que no interfiera con clics */
-            opacity: 0.8;
+            /* Aplicamos la animación */
+            animation: fireGlow 2s infinite alternate; 
+            pointer-events: none;
+            opacity: 0.9;
         }
 
         .member-photo {
             width: 100px;
             height: 100px;
             overflow: hidden;
-            border-radius: 50%; /* Foto de perfil circular */
+            border-radius: 50%;
             margin: 0 auto 10px;
             border: 3px solid #fff;
             box-shadow: 0 0 5px var(--purple-color);
@@ -170,71 +180,94 @@
         .member-photo img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Recorta la imagen para ajustarse perfectamente al marco circular */
+            object-fit: cover;
         }
 
         .member-text {
             font-size: 0.9em;
             color: #ccc;
-            height: 4.5em; /* Altura fija para el texto */
+            height: **6em;** /* Aumentado a 6em (aprox. 4 líneas) para más texto */
             overflow: hidden;
             line-height: 1.5;
         }
         
-        /* --- Eventos y Novedades --- */
+        /* --- Eventos y Novedades (MEJORA DE ESTILO) --- */
         .events-news {
             margin: 80px auto;
             text-align: left;
-            padding: 20px;
-            background-color: var(--mid-bg);
-            border-radius: 8px;
-            border-top: 5px solid var(--purple-color);
+            padding: 30px; /* Más padding */
+            background-color: #222; /* Fondo más oscuro y contrastante */
+            border-radius: 12px;
+            border: 2px solid var(--purple-color);
+            box-shadow: 0 0 20px rgba(187, 0, 255, 0.3); /* Sombra morada */
         }
 
         .events-news h2 {
-            color: var(--purple-color);
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+            color: #00ff41; /* Verde neón para el título de la sección */
+            text-shadow: 0 0 5px #00ff41;
+            border-bottom: 2px solid var(--purple-color);
+            padding-bottom: 15px;
             margin-bottom: 30px;
             text-align: center;
         }
         
         .sections-wrapper {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
         
         .calendar-section, .announcements-section {
             flex: 1;
-            min-width: 300px; /* Base mínima para tablet/escritorio */
+            min-width: 300px;
         }
         
         .calendar-section h3, .announcements-section h3 {
-            color: #00ff41; /* Verde para destacar información */
-            margin-bottom: 15px;
-        }
-        
-        .event-item, .announcement-item {
+            color: var(--fire-color); /* Naranja/Fuego para subtítulos */
+            font-size: 1.3em;
             margin-bottom: 20px;
-            padding: 10px;
-            border: 1px dashed #333;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            text-transform: uppercase;
         }
         
-        .event-item:hover, .announcement-item:hover {
-            background-color: #2a2a2a;
+        .event-item {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-left: 4px solid var(--purple-color); /* Borde lateral morado */
+            background-color: var(--mid-bg);
+            border-radius: 4px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .event-item:hover {
+            transform: translateY(-3px); /* Efecto 3D ligero */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
 
         .event-date {
-            color: var(--fire-color);
+            color: #00ff41;
             font-weight: 700;
+            display: block; /* Muestra fecha y hora en línea separada */
+            margin-bottom: 5px;
         }
         
+        .event-location {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .announcement-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: var(--mid-bg);
+            border: 1px solid #333;
+            border-top: 3px solid var(--fire-color); /* Borde superior de fuego */
+            border-radius: 6px;
+        }
+
         .announcement-item strong {
             color: var(--purple-color);
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
         }
 
         .announcement-photo-container {
@@ -243,6 +276,7 @@
             overflow: hidden;
             margin-top: 10px;
             border-radius: 4px;
+            border: 1px solid #555;
         }
 
         .announcement-photo-container img {
@@ -264,7 +298,7 @@
             }
             
             .platform-button {
-                width: 80%; /* Más anchos en móvil */
+                width: 90%;
                 margin: 0 auto;
             }
 
@@ -273,12 +307,16 @@
             }
 
             .member-card {
-                max-width: 250px;
+                max-width: 90%;
                 margin: 0 auto;
             }
 
             .members-grid {
-                grid-template-columns: 1fr; /* Una columna en móvil */
+                grid-template-columns: 1fr;
+            }
+            
+            .events-news {
+                padding: 20px 10px;
             }
         }
 
@@ -313,7 +351,7 @@
                         <img src="miembro1.png" alt="Foto de Miembro 1">
                     </div>
                     <div class="member-text">
-                        **[victor cespedes 16]** - Ganador del CTF "Shadow Protocol" de Q3. Código limpio y eficaz.
+                        **[Nombre de Usuario 1]** - Ganador del CTF "Shadow Protocol" de Q3. Código limpio y eficaz. Demostrando habilidades superiores en *reversing* binario.
                     </div>
                 </div>
                 <div class="member-card">
@@ -321,7 +359,7 @@
                         <img src="miembro2.png" alt="Foto de Miembro 2">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario]** - Contribuyó con la herramienta Python para ofuscación de payloads.
+                        **[Nombre de Usuario 2]** - Contribuyó con la herramienta Python automatizada para ofuscación de payloads y bypass de AV. Un gran aporte open source.
                     </div>
                 </div>
                 <div class="member-card">
@@ -329,7 +367,7 @@
                         <img src="miembro3.png" alt="Foto de Miembro 3">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario]** - Miembro más activo en el foro durante el último mes. Gran soporte a novatos.
+                        **[Nombre de Usuario 3]** - Miembro más activo en el foro durante el último mes. Gran soporte a novatos y mantenedor de las FAQs.
                     </div>
                 </div>
                 <div class="member-card">
@@ -337,7 +375,7 @@
                         <img src="miembro4.png" alt="Foto de Miembro 4">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario]** - Descubrió un bug crítico en la plataforma de entrenamiento interna.
+                        **[Nombre de Usuario 4]** - Descubrió un bug crítico RCE (Remote Code Execution) en la plataforma de entrenamiento interna. Reporte impecable.
                     </div>
                 </div>
                 <div class="member-card">
@@ -345,7 +383,7 @@
                         <img src="miembro5.png" alt="Foto de Miembro 5">
                     </div>
                     <div class="member-text">
-                        **[Nombre de Usuario]** - Diseñador de la nueva infraestructura de servidores del grupo de estudio.
+                        **[Nombre de Usuario 5]** - Diseñador y administrador de la nueva infraestructura de servidores del grupo de estudio. Seguridad *hardcore* implementada.
                     </div>
                 </div>
                 
@@ -355,34 +393,45 @@
         <hr style="border-color: #333;">
 
         <section class="events-news">
-            <h2><i class="fas fa-bullhorn"></i> Eventos y Novedades del Protocolo</h2>
+            <h2><i class="fas fa-microchip"></i> EVENTOS Y NOVEDADES DEL PROTOCOLO LEVIATHAM</h2>
             <div class="sections-wrapper">
                 
                 <div class="calendar-section">
-                    <h3>📅 Próximos Eventos (Fácil Edición)</h3>
+                    <h3>Próximos Eventos <i class="fas fa-calendar-alt"></i></h3>
                     <div class="event-item">
-                        <span class="event-date">25/11/2025 (19:00h):</span> CTF Interno - "The Root of All Evil" (Discord)
+                        <span class="event-date">25/11/2025 (19:00 UTC):</span> 
+                        CTF Interno - "The Root of All Evil" 
+                        <span class="event-location">(Plataforma Discord)</span>
                     </div>
                     <div class="event-item">
-                        <span class="event-date">02/12/2025 (20:30h):</span> Webinar: Introducción a Exploits en Web (Zoom/Twitch)
+                        <span class="event-date">02/12/2025 (20:30 UTC):</span> 
+                        Webinar: Introducción a Exploits en Web (XSS/SQLi)
+                        <span class="event-location">(Streaming Privado)</span>
                     </div>
                     <div class="event-item">
-                        <span class="event-date">08/12/2025 (18:00h):</span> Sesión de Estudio Grupal - Buffer Overflows (Telegram/Voz)
+                        <span class="event-date">08/12/2025 (18:00 UTC):</span> 
+                        Sesión de Estudio Grupal - Buffer Overflows
+                        <span class="event-location">(Sala de Voz Telegram)</span>
+                    </div>
+                    <div class="event-item">
+                        <span class="event-date">15/12/2025 (19:00 UTC):</span> 
+                        Reunión Oficial de Cierre de Año
+                        <span class="event-location">(Discord)</span>
                     </div>
                 </div>
                 
                 <div class="announcements-section">
-                    <h3>📰 Novedades del Protocolo (Fácil Edición)</h3>
+                    <h3>Novedades Oficiales <i class="fas fa-bullhorn"></i></h3>
                     <div class="announcement-item">
-                        <strong>¡Lanzamiento de la versión 2.0!</strong>
-                        <p>Hemos liberado la v2.0 de nuestra herramienta interna "PhishGuard", con soporte para Python 3.10.</p>
+                        <strong>¡Lanzamiento de la versión 2.0 de PhishGuard!</strong>
+                        <p>Hemos liberado la v2.0 de nuestra herramienta interna "PhishGuard", con soporte para Python 3.10 y nuevos templates de *phishing*.</p>
                         <div class="announcement-photo-container">
                             <img src="noticia_phishguard.png" alt="Imagen de la nueva versión de PhishGuard">
                         </div>
                     </div>
                     <div class="announcement-item">
-                        <strong>¡Nuevos Moderadores!</strong>
-                        <p>Damos la bienvenida a 3 nuevos *moderadores* al equipo de soporte y gestión de la comunidad.</p>
+                        <strong>¡Damos la Bienvenida a 3 Nuevos Moderadores!</strong>
+                        <p>Damos la bienvenida a 3 nuevos *moderadores* al equipo de soporte y gestión de la comunidad. Ayúdanos a darles una cálida bienvenida.</p>
                         <div class="announcement-photo-container">
                             <img src="noticia_equipo.png" alt="Imagen del nuevo equipo de moderadores">
                         </div>
