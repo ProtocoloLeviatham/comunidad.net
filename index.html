@@ -11,6 +11,7 @@
         :root {
             --purple-color: #bb00ff; /* Morado Hacking */
             --fire-color: #ff8c00;   /* Naranja/Fuego para destacar */
+            --gold-color: #ffd700;   /* Oro para Roles VIP */
             --dark-bg: #111;
             --mid-bg: #1e1e1e;
         }
@@ -113,14 +114,14 @@
             left: 100%;
         }
 
-        /* --- Hall of Fame --- */
+        /* --- Hall of Fame (FUEGO MEJORADO) --- */
         .hall-of-fame {
             margin: 50px auto;
         }
 
         .hall-of-fame h2 {
             color: var(--fire-color);
-            text-shadow: 0 0 5px var(--fire-color);
+            text-shadow: 0 0 5px var(--fire-color), 0 0 15px rgba(255, 140, 0, 0.5); /* Sombra intensa */
             margin-bottom: 30px;
             font-size: 1.8em;
         }
@@ -140,15 +141,13 @@
             position: relative;
             overflow: hidden;
             border: 1px solid #333;
-            /* Contenedor del efecto de fuego */
-            box-shadow: 0 0 5px rgba(255, 140, 0, 0.2);
         }
 
-        /* KEYFRAMES para la animación de fuego/brillo */
+        /* KEYFRAMES para la animación de fuego/brillo (MÁS INTENSO) */
         @keyframes fireGlow {
-            0% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4); }
-            50% { box-shadow: 0 0 15px var(--fire-color), 0 0 30px rgba(255, 140, 0, 0.8); }
-            100% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4); }
+            0% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4), 0 0 15px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 15px var(--fire-color), 0 0 30px rgba(255, 140, 0, 0.8), 0 0 45px rgba(255, 0, 0, 0.6); }
+            100% { box-shadow: 0 0 5px var(--fire-color), 0 0 10px rgba(255, 140, 0, 0.4), 0 0 15px rgba(255, 0, 0, 0.3); }
         }
 
         /* Marco de "Fuego" animado para destacar */
@@ -162,7 +161,7 @@
             border: 3px solid var(--fire-color);
             border-radius: 8px;
             /* Aplicamos la animación */
-            animation: fireGlow 2s infinite alternate; 
+            animation: fireGlow 1.8s infinite alternate; /* Animación más rápida */
             pointer-events: none;
             opacity: 0.9;
         }
@@ -186,24 +185,24 @@
         .member-text {
             font-size: 0.9em;
             color: #ccc;
-            height: **6em;** /* Aumentado a 6em (aprox. 4 líneas) para más texto */
+            height: 6em; 
             overflow: hidden;
             line-height: 1.5;
         }
         
-        /* --- Eventos y Novedades (MEJORA DE ESTILO) --- */
+        /* --- Eventos y Novedades --- */
         .events-news {
             margin: 80px auto;
             text-align: left;
-            padding: 30px; /* Más padding */
-            background-color: #222; /* Fondo más oscuro y contrastante */
+            padding: 30px;
+            background-color: #222;
             border-radius: 12px;
             border: 2px solid var(--purple-color);
-            box-shadow: 0 0 20px rgba(187, 0, 255, 0.3); /* Sombra morada */
+            box-shadow: 0 0 20px rgba(187, 0, 255, 0.3);
         }
 
         .events-news h2 {
-            color: #00ff41; /* Verde neón para el título de la sección */
+            color: #00ff41;
             text-shadow: 0 0 5px #00ff41;
             border-bottom: 2px solid var(--purple-color);
             padding-bottom: 15px;
@@ -222,7 +221,7 @@
         }
         
         .calendar-section h3, .announcements-section h3 {
-            color: var(--fire-color); /* Naranja/Fuego para subtítulos */
+            color: var(--fire-color);
             font-size: 1.3em;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -231,21 +230,21 @@
         .event-item {
             margin-bottom: 20px;
             padding: 12px;
-            border-left: 4px solid var(--purple-color); /* Borde lateral morado */
+            border-left: 4px solid var(--purple-color);
             background-color: var(--mid-bg);
             border-radius: 4px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .event-item:hover {
-            transform: translateY(-3px); /* Efecto 3D ligero */
+            transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
 
         .event-date {
             color: #00ff41;
             font-weight: 700;
-            display: block; /* Muestra fecha y hora en línea separada */
+            display: block;
             margin-bottom: 5px;
         }
         
@@ -259,7 +258,7 @@
             padding: 15px;
             background-color: var(--mid-bg);
             border: 1px solid #333;
-            border-top: 3px solid var(--fire-color); /* Borde superior de fuego */
+            border-top: 3px solid var(--fire-color);
             border-radius: 6px;
         }
 
@@ -272,7 +271,7 @@
 
         .announcement-photo-container {
             width: 100%;
-            height: 150px;
+            height: **200px;** /* Agrandado a 200px */
             overflow: hidden;
             margin-top: 10px;
             border-radius: 4px;
@@ -286,37 +285,104 @@
             object-position: center top;
         }
 
+        /* --- Sección de Roles (NUEVO) --- */
+        .roles-section {
+            margin: 80px auto;
+            padding: 30px;
+            background-color: #0d0d0d;
+            border: 2px solid var(--gold-color);
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .roles-section h2 {
+            color: var(--gold-color);
+            text-shadow: 0 0 10px var(--gold-color);
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        .roles-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .role-card {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: left;
+            position: relative;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .role-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estilo y Efecto Único para cada Rol */
+
+        /* Rol 1: Cryptographer (20 Invita) */
+        .role-1 {
+            border: 2px solid var(--purple-color);
+            box-shadow: 0 0 10px var(--purple-color);
+        }
+        .role-1 h3 { color: var(--purple-color); }
+        .role-1 h3 i { margin-right: 10px; color: #00ff41; }
+        
+        /* Rol 2: Sentinel (100 Invita) */
+        .role-2 {
+            border: 2px solid var(--fire-color);
+            box-shadow: 0 0 15px var(--fire-color);
+        }
+        .role-2 h3 { color: var(--fire-color); }
+        .role-2 h3 i { margin-right: 10px; color: var(--gold-color); }
+
+        /* Rol 3: Leviathan Elite (200 Invita) */
+        @keyframes pulseGold {
+            0% { box-shadow: 0 0 10px var(--gold-color), 0 0 20px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 20px var(--gold-color), 0 0 40px rgba(255, 215, 0, 0.8); }
+        }
+        .role-3 {
+            border: 3px solid var(--gold-color);
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            animation: pulseGold 1.5s infinite alternate;
+        }
+        .role-3 h3 { color: var(--gold-color); text-shadow: 0 0 5px var(--gold-color); }
+        .role-3 h3 i { margin-right: 10px; font-size: 1.8em; }
+
+        .role-card ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9em;
+        }
+
+        .role-card ul li {
+            margin-bottom: 8px;
+            border-bottom: 1px dotted #333;
+            padding-bottom: 5px;
+        }
+        
         /* --- MEDIA QUERIES (Adaptación Móvil) --- */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            
-            .access-gates {
+            /* ... (Estilos móviles anteriores se mantienen) ... */
+            .sections-wrapper, .roles-grid {
                 flex-direction: column;
-                gap: 15px;
+                align-items: center;
             }
-            
-            .platform-button {
+            .role-card {
                 width: 90%;
-                margin: 0 auto;
-            }
-
-            .sections-wrapper {
-                flex-direction: column;
-            }
-
-            .member-card {
-                max-width: 90%;
-                margin: 0 auto;
-            }
-
-            .members-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .events-news {
-                padding: 20px 10px;
             }
         }
 
@@ -413,11 +479,6 @@
                         Sesión de Estudio Grupal - Buffer Overflows
                         <span class="event-location">(Sala de Voz Telegram)</span>
                     </div>
-                    <div class="event-item">
-                        <span class="event-date">15/12/2025 (19:00 UTC):</span> 
-                        Reunión Oficial de Cierre de Año
-                        <span class="event-location">(Discord)</span>
-                    </div>
                 </div>
                 
                 <div class="announcements-section">
@@ -440,10 +501,54 @@
                 
             </div>
         </section>
+        
+        <hr style="border-color: #333;">
+
+        <section class="roles-section">
+            <h2>🥇 Programas de Recompensa: Roles de Élite</h2>
+            <div class="roles-grid">
+                
+                <div class="role-card role-1">
+                    <h3><i class="fas fa-code-branch"></i> CRYPTOGRAPHER</h3>
+                    <p>Requisito: **20 Invitaciones** Aceptadas a la Comunidad</p>
+                    <hr style="border-color: #333; margin: 15px 0;">
+                    <p>**Recompensas Incluidas:**</p>
+                    <ul>
+                        <li><i class="fas fa-key"></i> Acceso a **Herramientas Privadas** de la Comunidad (Scripts, utilidades)</li>
+                        <li><i class="fas fa-laptop-code"></i> Ayuda y soporte especializado para tus **Proyectos Personales**</li>
+                        <li><i class="fas fa-file-invoice"></i> Opción a tu **Mini-Web de Perfil** en el Subdominio del Protocolo</li>
+                    </ul>
+                </div>
+
+                <div class="role-card role-2">
+                    <h3><i class="fas fa-shield-alt"></i> SENTINEL</h3>
+                    <p>Requisito: **100 Invitaciones** Aceptadas a la Comunidad</p>
+                    <hr style="border-color: #333; margin: 15px 0;">
+                    <p>**Recompensas Incluidas (Acumulativas):**</p>
+                    <ul>
+                        <li><i class="fas fa-globe"></i> **Página Web** o Landing Page Personalizada (Hosting incluido)</li>
+                        <li><i class="fas fa-chalkboard-teacher"></i> **Mentoría Individualizada** (Temas a elección: Reversing, Web Hacking)</li>
+                        <li><i class="fas fa-biohazard"></i> Acceso a **Herramientas Beta** de Pentesting (Uso ético y legal bajo tu responsabilidad)</li>
+                    </ul>
+                </div>
+
+                <div class="role-card role-3">
+                    <h3><i class="fas fa-crown"></i> LEVIATHAN ELITE</h3>
+                    <p>Requisito: **200 Invitaciones** Aceptadas a la Comunidad</p>
+                    <hr style="border-color: #333; margin: 15px 0;">
+                    <p>**Recompensas Incluidas (Acumulativas y Exclusivas):**</p>
+                    <ul>
+                        <li><i class="fas fa-lock"></i> **Grupo VIP de Telegram** con Acceso Total y Contenido Exclusivo</li>
+                        <li><i class="fas fa-user-secret"></i> **Foro Privado** de Discusión Estratégica con el Liderazgo del Protocolo</li>
+                        <li><i class="fas fa-fire-extinguisher"></i> Acceso Prioritario a todas las Pruebas Beta y Recursos Secretos</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </section>
+
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
