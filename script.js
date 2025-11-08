@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         drops[i] = 1; // Empieza desde la primera fila
     }
 
-    // El color morado deseado
+    // El color morado deseado (debe coincidir con la variable CSS)
     const purpleColor = '#bb00ff';
 
     // Función para dibujar la lluvia de código
@@ -65,22 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Comportamiento Adicional (Opcional: puedes agregar más interacción aquí)
-    
-    // Ejemplo: Animación de color en los títulos al pasar el ratón (Hover)
-    const titles = document.querySelectorAll('h1, h2, h3');
-    titles.forEach(title => {
-        title.addEventListener('mouseenter', () => {
-            title.style.color = '#00ff41'; // Color neón alternativo
-            title.style.transition = 'color 0.2s';
-        });
-        title.addEventListener('mouseleave', () => {
-            // Revertir a los colores definidos en el CSS (morado/verde)
-            if(title.tagName === 'H2') {
-                 title.style.color = '#00ff41'; // Se mantiene verde
-            } else {
-                 title.style.color = purpleColor; // Vuelve a morado
-            }
-        });
-    });
+    // 2. Comportamiento Adicional (Opcional)
+    // No hay código adicional aquí, el CSS maneja los efectos.
 });
