@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidad Protocolo Leviatham - Hacking & Seguridad</title>
+    <title>Comunidades - Protocolo Leviatham</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Variables de Color */
         :root {
-            --purple-color: #bb00ff; /* Tono de morado */
+            --purple-color: #bb00ff; /* Morado Hacking */
+            --fire-color: #ff8c00;   /* Naranja/Fuego para destacar */
             --dark-bg: #111;
+            --mid-bg: #1e1e1e;
         }
 
+        /* Estilos Base y Tipografía */
         body {
             background-color: var(--dark-bg);
             color: #fff;
             font-family: 'Roboto Mono', monospace;
             margin: 0;
-            overflow: hidden; /* Oculta el scrollbar causado por la lluvia */
+            overflow-x: hidden; /* Previene scroll horizontal en móviles */
         }
 
         /* --- Lluvia de Código (Matrix) --- */
@@ -27,35 +31,45 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Mantenlo detrás de todo el contenido */
-            opacity: 0.3; /* Para que el texto sea legible */
+            z-index: -1;
+            opacity: 0.3;
         }
 
-        /* --- Contenido Principal --- */
+        /* --- Contenido Principal y Header --- */
         .container {
             position: relative;
             z-index: 1;
             padding: 20px;
             text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         header h1 {
             color: var(--purple-color);
             text-shadow: 0 0 10px var(--purple-color);
-            font-size: 3em;
-            margin-bottom: 50px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        header p {
+            font-size: 1.1em;
+            margin-bottom: 40px;
         }
 
-        /* --- Estilo de Botones de Acceso --- */
+        /* --- Puertas de Acceso (Botones) --- */
         .access-gates {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 80px;
+            gap: 20px;
+            margin-bottom: 60px;
         }
 
         .platform-button {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 250px;
             background-color: transparent;
             color: #fff;
             border: 2px solid var(--purple-color);
@@ -67,8 +81,13 @@
             border-radius: 8px;
             position: relative;
             overflow: hidden;
-            transition: color 0.4s, background-color 0.4s;
+            transition: all 0.4s;
             z-index: 1;
+        }
+
+        .platform-button i {
+            font-size: 1.5em;
+            margin-right: 15px;
         }
 
         /* Efecto Hover: Brillo morado */
@@ -94,82 +113,173 @@
             left: 100%;
         }
 
-        /* Estilos para el icono (miniatura.png) */
-        .platform-button img {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        /* --- Muro de Miembros --- */
+        /* --- Hall of Fame --- */
         .hall-of-fame {
             margin: 50px auto;
-            max-width: 900px;
         }
 
         .hall-of-fame h2 {
-            color: #00ff41; /* Verde neón para el Hall of Fame */
-            text-shadow: 0 0 5px #00ff41;
+            color: var(--fire-color);
+            text-shadow: 0 0 5px var(--fire-color);
             margin-bottom: 30px;
+            font-size: 1.8em;
         }
 
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            padding: 20px;
-            background-color: #222;
-            border: 1px solid var(--purple-color);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adaptación flexible */
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .member-card {
+            background-color: var(--mid-bg);
+            padding: 15px;
             border-radius: 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
         }
 
-        .member-slot {
+        /* Marco de "Fuego" para destacar */
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid var(--fire-color);
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--fire-color), 0 0 20px rgba(255, 140, 0, 0.5);
+            pointer-events: none; /* Asegura que no interfiera con clics */
+            opacity: 0.8;
+        }
+
+        .member-photo {
+            width: 100px;
             height: 100px;
-            background-color: #333;
-            border: 2px dashed #555;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 0.8em;
-            cursor: default;
+            overflow: hidden;
+            border-radius: 50%; /* Foto de perfil circular */
+            margin: 0 auto 10px;
+            border: 3px solid #fff;
+            box-shadow: 0 0 5px var(--purple-color);
         }
 
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Recorta la imagen para ajustarse perfectamente al marco circular */
+        }
+
+        .member-text {
+            font-size: 0.9em;
+            color: #ccc;
+            height: 4.5em; /* Altura fija para el texto */
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        
         /* --- Eventos y Novedades --- */
         .events-news {
-            display: flex;
-            justify-content: space-around;
-            max-width: 1000px;
             margin: 80px auto;
             text-align: left;
-        }
-
-        .calendar-section, .announcements-section {
-            width: 45%;
             padding: 20px;
-            border: 1px solid #444;
-            border-left: 5px solid var(--purple-color);
-            border-radius: 4px;
+            background-color: var(--mid-bg);
+            border-radius: 8px;
+            border-top: 5px solid var(--purple-color);
         }
 
-        .events-news h3 {
+        .events-news h2 {
             color: var(--purple-color);
             border-bottom: 2px solid #333;
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
         }
-
-        .event-item, .announcement-item {
+        
+        .sections-wrapper {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .calendar-section, .announcements-section {
+            flex: 1;
+            min-width: 300px; /* Base mínima para tablet/escritorio */
+        }
+        
+        .calendar-section h3, .announcements-section h3 {
+            color: #00ff41; /* Verde para destacar información */
             margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 2px solid #555;
+        }
+        
+        .event-item, .announcement-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px dashed #333;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .event-item:hover, .announcement-item:hover {
+            background-color: #2a2a2a;
         }
 
         .event-date {
-            color: #00ff41;
+            color: var(--fire-color);
             font-weight: 700;
+        }
+        
+        .announcement-item strong {
+            color: var(--purple-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .announcement-photo-container {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .announcement-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        /* --- MEDIA QUERIES (Adaptación Móvil) --- */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .access-gates {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .platform-button {
+                width: 80%; /* Más anchos en móvil */
+                margin: 0 auto;
+            }
+
+            .sections-wrapper {
+                flex-direction: column;
+            }
+
+            .member-card {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr; /* Una columna en móvil */
+            }
         }
 
     </style>
@@ -180,61 +290,110 @@
 
     <div class="container">
         <header>
-            <h1>Protocolo Leviatham</h1>
-            <p>Comunidad de Hacking Ético, CTFs y Desarrollo de Herramientas.</p>
+            <h1><i class="fas fa-terminal"></i> COMUNIDADES</h1>
+            <p>Protocolo Leviatham: Plataformas Centrales de Acceso</p>
         </header>
-
+        
         <section class="access-gates">
-            <a href="#" class="platform-button discord-button">
-                <img src="miniatura.png" alt="Icono Discord">
-                Discord
+            <a href="[ENLACE_INVITACION_DISCORD]" class="platform-button discord-button" target="_blank">
+                <i class="fab fa-discord"></i> Discord
             </a>
-            <a href="#" class="platform-button telegram-button">
-                <img src="miniatura.png" alt="Icono Telegram">
-                Telegram
+            <a href="[ENLACE_TELEGRAM_PRINCIPAL]" class="platform-button telegram-button" target="_blank">
+                <i class="fab fa-telegram-plane"></i> Telegram
             </a>
         </section>
 
+        <hr style="border-color: #333;">
+
         <section class="hall-of-fame">
-            <h2>🏆 Hall of Fame - Miembros Destacados</h2>
+            <h2>🔥 Hall of Fame - Reconocimiento a Destacados</h2>
             <div class="members-grid">
-                <div class="member-slot" id="member-1">Miembro destacado 33 por su herramientas ip loggers</div>
-                <div class="member-slot" id="member-2">Miembro 2 (CTF/Código)</div>
-                <div class="member-slot" id="member-3">Miembro 3 (CTF/Código)</div>
-                <div class="member-slot" id="member-4">Miembro 4 (CTF/Código)</div>
-                <div class="member-slot" id="member-5">Miembro 5 (CTF/Código)</div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="miembro1.png" alt="Foto de Miembro 1">
+                    </div>
+                    <div class="member-text">
+                        **[Nombre de Usuario]** - Ganador del CTF "Shadow Protocol" de Q3. Código limpio y eficaz.
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="miembro2.png" alt="Foto de Miembro 2">
+                    </div>
+                    <div class="member-text">
+                        **[Nombre de Usuario]** - Contribuyó con la herramienta Python para ofuscación de payloads.
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="miembro3.png" alt="Foto de Miembro 3">
+                    </div>
+                    <div class="member-text">
+                        **[Nombre de Usuario]** - Miembro más activo en el foro durante el último mes. Gran soporte a novatos.
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="miembro4.png" alt="Foto de Miembro 4">
+                    </div>
+                    <div class="member-text">
+                        **[Nombre de Usuario]** - Descubrió un bug crítico en la plataforma de entrenamiento interna.
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="miembro5.png" alt="Foto de Miembro 5">
+                    </div>
+                    <div class="member-text">
+                        **[Nombre de Usuario]** - Diseñador de la nueva infraestructura de servidores del grupo de estudio.
+                    </div>
+                </div>
+                
             </div>
         </section>
 
+        <hr style="border-color: #333;">
+
         <section class="events-news">
-            <div class="calendar-section">
-                <h3>📅 Calendario de Eventos</h3>
-                <div class="event-item">
-                    <span class="event-date">25/11/2025:</span> CTF Interno - "The Root of All Evil"
+            <h2><i class="fas fa-bullhorn"></i> Eventos y Novedades del Protocolo</h2>
+            <div class="sections-wrapper">
+                
+                <div class="calendar-section">
+                    <h3>📅 Próximos Eventos (Fácil Edición)</h3>
+                    <div class="event-item">
+                        <span class="event-date">25/11/2025 (19:00h):</span> CTF Interno - "The Root of All Evil" (Discord)
+                    </div>
+                    <div class="event-item">
+                        <span class="event-date">02/12/2025 (20:30h):</span> Webinar: Introducción a Exploits en Web (Zoom/Twitch)
+                    </div>
+                    <div class="event-item">
+                        <span class="event-date">08/12/2025 (18:00h):</span> Sesión de Estudio Grupal - Buffer Overflows (Telegram/Voz)
+                    </div>
                 </div>
-                <div class="event-item">
-                    <span class="event-date">02/12/2025:</span> Webinar: Introducción a Exploits en Web
+                
+                <div class="announcements-section">
+                    <h3>📰 Novedades del Protocolo (Fácil Edición)</h3>
+                    <div class="announcement-item">
+                        <strong>¡Lanzamiento de la versión 2.0!</strong>
+                        <p>Hemos liberado la v2.0 de nuestra herramienta interna "PhishGuard", con soporte para Python 3.10.</p>
+                        <div class="announcement-photo-container">
+                            <img src="noticia_phishguard.png" alt="Imagen de la nueva versión de PhishGuard">
+                        </div>
+                    </div>
+                    <div class="announcement-item">
+                        <strong>¡Nuevos Moderadores!</strong>
+                        <p>Damos la bienvenida a 3 nuevos *moderadores* al equipo de soporte y gestión de la comunidad.</p>
+                        <div class="announcement-photo-container">
+                            <img src="noticia_equipo.png" alt="Imagen del nuevo equipo de moderadores">
+                        </div>
+                    </div>
                 </div>
-                <div class="event-item">
-                    <span class="event-date">08/12/2025:</span> Sesión de Estudio Grupal - Buffer Overflows
-                </div>
-                </div>
-            <div class="announcements-section">
-                <h3>📢 Anuncios Oficiales (Protocolo Leviatham)</h3>
-                <div class="announcement-item">
-                    **05/11/2025:** ¡Lanzamiento de la versión 2.0 de nuestra herramienta interna "PhishGuard"!
-                </div>
-                <div class="announcement-item">
-                    **01/11/2025:** Damos la bienvenida a 3 nuevos *moderadores* al equipo de soporte.
-                </div>
-                <div class="announcement-item">
-                    **20/10/2025:** Logro: Superamos los 1000 miembros activos en el foro.
-                </div>
-                </div>
+                
+            </div>
         </section>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
+
